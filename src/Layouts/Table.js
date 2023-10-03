@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { apiBaseUrl, publicKey } from "../config";
 import "./Table.css";
 
-const Table = () => {
+const Table = ({ character }) => {
   const itemsPerPage = 20;
 
   const [characters, setCharacters] = useState([]);
@@ -44,7 +44,7 @@ const Table = () => {
             <tr key={item.id}>
               <td>{item.id}</td>
               <td>
-                <Link to="character_profile.html" className="profile-link">
+                <Link to={`/profile/${item.id}`} className="profile-link">
                   {item.name}
                 </Link>
               </td>
@@ -60,6 +60,7 @@ const Table = () => {
           ))}
         </tbody>
       </table>
+
       {/* Pagination */}
       <div className="pagination">
         <button className="page-item" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
