@@ -1,21 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // Import useParams
+import { useParams } from "react-router-dom";
 import Comics from "../Layouts/Comics";
 import Series from "../Layouts/Series";
-
 import { apiBaseUrl, publicKey } from "../config";
 
+/**
+ * The CharacterProfile component displays details of a Marvel character
+ * based on the character's ID obtained from the route parameters.
+ */
 const CharacterProfile = () => {
+  // State to store character data and loading status
   const [character, setCharacter] = useState({});
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
 
-  // Call useParams to get the route parameters
+  // Get the characterId from route parameters using useParams
   const { characterId } = useParams();
 
   useEffect(() => {
-    console.log({ characterId });
-    // Make sure characterId is defined before fetching data
+    // Fetch character data when the characterId changes
     if (characterId) {
       const fetchData = async () => {
         try {
@@ -42,6 +45,7 @@ const CharacterProfile = () => {
 
   return (
     <>
+      {/* Character information */}
       <div>CharacterProfile</div>
       <h1>Name</h1>
       <p>{character.name}</p>
@@ -53,8 +57,12 @@ const CharacterProfile = () => {
         alt="Character Thumbnail"
         className="characterImage"
       />
+
+      {/* Display Comics component and count */}
       <Comics />
       <p>{character.comics.available}</p>
+
+      {/* Display Series component and count */}
       <Series />
       <p>{character.series.available}</p>
     </>

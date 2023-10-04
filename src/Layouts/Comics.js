@@ -3,16 +3,20 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { apiBaseUrl, publicKey } from "../config";
 
+/**
+ * The Comics component fetches and displays a list of comics related to a Marvel character.
+ * It uses the characterId obtained from route parameters to fetch the character's comics.
+ */
 function Comics() {
-  const [Comic, setComics] = useState({});
-  const [loading, setLoading] = useState(true); // Add a loading state
+  // State to store comics data and loading status
+  const [comics, setComics] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Call useParams to get the route parameters
+  // Get the characterId from route parameters using useParams
   const { characterId } = useParams();
 
   useEffect(() => {
-    console.log({ characterId });
-    // Make sure characterId is defined before fetching data
+    // Fetch comics data when the characterId changes
     if (characterId) {
       const fetchData = async () => {
         try {
@@ -21,7 +25,6 @@ function Comics() {
           const response = await axios.get(api);
           const data = response.data.data.results;
           setComics(data);
-          console.log(data);
           setLoading(false); // Set loading to false when data is fetched
         } catch (err) {
           console.error(err);
@@ -40,12 +43,13 @@ function Comics() {
 
   return (
     <>
+      {/* Display a list of comics */}
       <h1>Comics</h1>
-      {Comic.map((item) => (
-        <ul key={item.id}>
-          <li>{item.title}</li>
-        </ul>
-      ))}
+      <ul>
+        {comics.map((item) => (
+          <li key={item.id}>{item.title}</li>
+        ))}
+      </ul>
     </>
   );
 }

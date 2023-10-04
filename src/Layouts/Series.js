@@ -3,32 +3,47 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { apiBaseUrl, publicKey } from "../config";
 
+/**
+ * The Series component displays a list of series associated with a character.
+ * It fetches and displays the series data for the selected character.
+ */
 function Series() {
-  const [Series, setSeries] = useState({});
-  const [loading, setLoading] = useState(true); // Add a loading state
+  // State to store the series data
+  const [seriesData, setSeriesData] = useState([]);
 
-  // Call useParams to get the route parameters
+  // State to manage the loading status
+  const [loading, setLoading] = useState(true);
+
+  // Get the characterId from the route parameters using useParams
   const { characterId } = useParams();
 
+  // Fetch and set the series data when the characterId changes
   useEffect(() => {
-    console.log({ characterId });
-    // Make sure characterId is defined before fetching data
+    // Check if characterId is defined before fetching data
     if (characterId) {
       const fetchData = async () => {
         try {
-          const api = `${apiBaseUrl}/${characterId}/comics?apikey=${publicKey}`;
+          // Construct the API URL for fetching series data
+          const api = `${apiBaseUrl}/${characterId}/series?apikey=${publicKey}`;
 
+          // Fetch series data from the API
           const response = await axios.get(api);
           const data = response.data.data.results;
-          setSeries(data);
-          console.log(data);
-          setLoading(false); // Set loading to false when data is fetched
+
+          // Update the state with the fetched series data
+          setSeriesData(data);
+
+          // Set loading to false when data is fetched
+          setLoading(false);
         } catch (err) {
           console.error(err);
-          setLoading(false); // Set loading to false in case of an error
+
+          // Set loading to false in case of an error
+          setLoading(false);
         }
       };
 
+      // Call the fetchData function
       fetchData();
     }
   }, [characterId]);
@@ -41,11 +56,11 @@ function Series() {
   return (
     <>
       <h1>Series</h1>
-      {Series.map((item) => (
-        <ul key={item.id}>
-          <li>{item.title}</li>
-        </ul>
-      ))}
+      <ul>
+        {seriesData.map((item) => (
+          <li key={item.id}>{item.title}</li>
+        ))}
+      </ul>
     </>
   );
 }
