@@ -1,13 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // Import useParams
-import Comics from "../Layouts/Comics";
-import Series from "../Layouts/Series";
-
+import { useParams } from "react-router-dom";
 import { apiBaseUrl, publicKey } from "../config";
 
-const CharacterProfile = () => {
-  const [character, setCharacter] = useState({});
+function Comics() {
+  const [Comic, setComics] = useState({});
   const [loading, setLoading] = useState(true); // Add a loading state
 
   // Call useParams to get the route parameters
@@ -19,11 +16,12 @@ const CharacterProfile = () => {
     if (characterId) {
       const fetchData = async () => {
         try {
-          const api = `${apiBaseUrl}/${characterId}?apikey=${publicKey}`;
+          const api = `${apiBaseUrl}/${characterId}/comics?apikey=${publicKey}`;
 
           const response = await axios.get(api);
           const data = response.data.data.results;
-          setCharacter(data[0]);
+          setComics(data);
+          console.log(data);
           setLoading(false); // Set loading to false when data is fetched
         } catch (err) {
           console.error(err);
@@ -42,23 +40,14 @@ const CharacterProfile = () => {
 
   return (
     <>
-      <div>CharacterProfile</div>
-      <h1>Name</h1>
-      <p>{character.name}</p>
-      <h1>Description</h1>
-      <p>{character.description || "Description not available"}</p>
-      <h1>Thumbnail</h1>
-      <img
-        src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-        alt="Character Thumbnail"
-        className="characterImage"
-      />
-      <Comics />
-      <p>{character.comics.available}</p>
-      <Series />
-      <p>{character.series.available}</p>
+      <h1>Comics</h1>
+      {Comic.map((item) => (
+        <ul key={item.id}>
+          <li>{item.title}</li>
+        </ul>
+      ))}
     </>
   );
-};
+}
 
-export default CharacterProfile;
+export default Comics;
