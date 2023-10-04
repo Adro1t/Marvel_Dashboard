@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Layouts/Navbar";
 import Table from "../Layouts/Table";
 
-const Character = () => {
+const CharacterList = () => {
   return (
     <>
       <Navbar />
@@ -12,4 +12,4 @@ const Character = () => {
   );
 };
 
-export default Character;
+export default CharacterList;

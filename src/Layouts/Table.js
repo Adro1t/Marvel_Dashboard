@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { apiBaseUrl, publicKey } from "../config";
 import "./Table.css";
 
-const Table = ({ character }) => {
+const Table = () => {
   const itemsPerPage = 20;
 
   const [characters, setCharacters] = useState([]);

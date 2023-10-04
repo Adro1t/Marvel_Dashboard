@@ -1,9 +1,9 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Search from "./Layouts/Search";
 import About from "./components/About";
-import Character from "./components/Character";
+import CharacterList from "./components/CharacterList";
 import CharacterProfile from "./components/CharacterProfile";
 import Home from "./components/Home";
-import Test from "./components/Test";
 
 function App() {
   return (
@@ -11,10 +11,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/characters" element={<Character />} />
+          <Route path="/characters" element={<CharacterList />} />
           <Route path="/about" element={<About />} />
-          <Route path="/test" element={<Test />} />
           <Route path="/profile/:characterId" element={<CharacterProfile />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </Router>
     </>
