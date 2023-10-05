@@ -2,8 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comics from "../Layouts/Comics";
+import Footer from "../Layouts/Footer";
+import Navbar from "../Layouts/Navbar";
 import Series from "../Layouts/Series";
 import { apiBaseUrl, publicKey } from "../config";
+import "./CharacterProfile.css";
 
 /**
  * The CharacterProfile component displays details of a Marvel character
@@ -45,26 +48,32 @@ const CharacterProfile = () => {
 
   return (
     <>
+      <Navbar />
       {/* Character information */}
-      <div>CharacterProfile</div>
-      <h1>Name</h1>
-      <p>{character.name}</p>
-      <h1>Description</h1>
-      <p>{character.description || "Description not available"}</p>
-      <h1>Thumbnail</h1>
-      <img
-        src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-        alt="Character Thumbnail"
-        className="characterImage"
-      />
-
-      {/* Display Comics component and count */}
-      <Comics />
-      <p>{character.comics.available}</p>
-
-      {/* Display Series component and count */}
-      <Series />
-      <p>{character.series.available}</p>
+      <div className="container text-dark">
+        <div className="row">
+          {/* Character Card */}
+          <div className="col-md-10 offset-md-1">
+            <div className="character-card">
+              <h2>{character.name}</h2>
+              <img
+                src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                alt="Character Thumbnail"
+                className="character-image"
+              />
+              <h4>Description</h4>
+              <p>{character.description}</p>
+              <h4>Comics</h4>
+              {/* Display Comics component */}
+              <Comics />
+              <h4>Series</h4>
+              {/* Display Series component */}
+              <Series />
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
     </>
   );
 };

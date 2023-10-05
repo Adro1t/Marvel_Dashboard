@@ -45,7 +45,7 @@ const SearchBar = ({ setResults }) => {
   };
 
   return (
-    <form className="d-flex" role="search">
+    <form className="searchbar d-flex" role="search">
       <input
         className="form-control me-2"
         type="search"
@@ -54,7 +54,7 @@ const SearchBar = ({ setResults }) => {
         onChange={(e) => handleChange(e.target.value)}
         aria-label="Search"
       />
-      <button className="btn btn-outline-success" type="submit">
+      <button className="btn btn-outline-danger" type="submit">
         Search
       </button>
     </form>

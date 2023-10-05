@@ -9,11 +9,11 @@ import Search from "./Search";
 const Navbar = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "black" }}>
         <div className="container-fluid">
           {/* Brand/logo link */}
           <Link className="navbar-brand" to="/">
-            MARVEL
+            <img src="./images/marvel_logo.jpg" alt="logo" height="50px" />
           </Link>
 
           {/* Toggle button for mobile navigation */}
@@ -47,10 +47,10 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-          </div>
 
-          {/* Search component */}
-          <Search />
+            {/* Search component */}
+            <Search />
+          </div>
         </div>
       </nav>
     </>

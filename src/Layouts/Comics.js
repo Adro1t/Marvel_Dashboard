@@ -44,8 +44,7 @@ function Comics() {
   return (
     <>
       {/* Display a list of comics */}
-      <h1>Comics</h1>
-      <ul>
+      <ul style={{ listStyle: "none" }}>
         {comics.map((item) => (
           <li key={item.id}>{item.title}</li>
         ))}

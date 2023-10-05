@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Search.css";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
 
@@ -12,11 +13,13 @@ const Search = () => {
 
   return (
     <>
-      {/* Render the SearchBar component and pass the setResults callback */}
-      <SearchBar setResults={setResults} />
+      <div className="search-container">
+        {/* Render the SearchBar component and pass the setResults callback */}
+        <SearchBar setResults={setResults} />
 
-      {/* Render the SearchResults component and pass the results */}
-      <SearchResults results={results} />
+        {/* Render the SearchResults component and pass the results */}
+        <SearchResults results={results} />
+      </div>
     </>
   );
 };

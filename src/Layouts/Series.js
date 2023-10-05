@@ -55,8 +55,7 @@ function Series() {
 
   return (
     <>
-      <h1>Series</h1>
-      <ul>
+      <ul style={{ listStyle: "none" }}>
         {seriesData.map((item) => (
           <li key={item.id}>{item.title}</li>
         ))}
